@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <title>clasificador de sentimientos para textos en español</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  </head>
+  <body style="background-color:#FFFCF4">
+    <div class="container-fluid">
+        <br><br>
+        <h2 class="text-center"><img src="https://arquitecturasemocionales.com/wp-content/uploads/2021/06/ilustracion-cultura-emocional.png" width="100" height="100"> <strong>Resultados del clasificador de sentimientos (positivos/negativos) en español</strong></h2>
+        <h3 class="text-center">El modelo utilizado fue Machine Learning classic (regresión logistica)</h3>
+        <hr>
+        <h3 class="text-center"><strong>Sentimiento:</strong></h3>
+        <div class="text-center">"{{ content }}"</div>
+
+        <h3 class="text-center"><strong>Predicción:</strong></h3>
+        <div class="text-center">El sentimiento se clasificó como <strong>{{ prediction }}</strong></div>
+        <hr>
+        <form class="text-center" action="/gracias" method="post">
+    	  	¿La clasificación fue correcta?
+    	  	<center><input style="background-color:#DCFFFC; color:black; border-color:#DCFFFC" type=submit value='Aprobado' name='feedback_button'></center>
+    	  	<input style="background-color:#DCFFFC; color:black; border-color:#DCFFFC" type=hidden value='{{ prediction }}' name='prediction'>
+    		<input type=hidden value='{{ content }}' name='texto'>
+    	</form>
+    	<br><center>De lo contrario seleccione la opción correcta del sentimiento</center><br>
+    	<form class="text-center" action="/gracias" method="post">
+    		<input style="background-color:#DCFFFC; color:black; border-color:#DCFFFC" type=submit value='Sentimientos positivos' name='feedback_button'><br>
+    		<input style="background-color:#DCFFFC; color:black; border-color:#DCFFFC" type=hidden value='Positivo' name='prediction'>
+    		<input type=hidden value='{{ content }}' name='texto'>
+    	</form>
+    	<form class="text-center" action="/gracias" method="post">
+    		<input style="background-color:#DCFFFC; color:black; border-color:#DCFFFC" type=submit value='Sentimientos negativos' name='feedback_button'><br>
+    		<input style="background-color:#DCFFFC; color:black; border-color:#DCFFFC" type=hidden value='Negativo' name='prediction'>
+    		<input type=hidden value='{{ content }}' name='texto'>
+    	</form>
+
+        <hr>
+
+        <form class="text-center" action="/">
+           <input style="background-color:#DCFFFC; color:black; border-color:#DCFFFC" type=submit class="btn btn-primary" value='Evaluar otro texto'>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" type="text/javascript"></script>
+</body>
+</html>
